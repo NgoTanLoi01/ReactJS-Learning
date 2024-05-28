@@ -5,29 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
 </head>
 
 <body>
 
-    <div id="root"></div>
+    <!-- Bai tap:
+    <div class="post-item">
+        <h2 title="Hoc React tai F8"> Hoc ReactJS</h2>
+        <p>Hoc ReactJS tu co ban den nang cao</p>
+    </div> -->
 
     <script>
-        const root = document.getElementById('root');
-        const h1 = document.createElement('h1');
+        //DOM
+        const ulDom = document.createElement('ul');
+        ulDom.id = 'ul-id'
+        ulDom.style = 'color: red; font-size: 30px'
 
-        h1.innerText = 'Hello guys!';
-        h1.id = 'heading';
-        h1.className = 'test class-2';
-        Object.assign(h1.style,{
-            color: 'blue',
-            backgroundColor: '#333'
-        })
+        const liDom1 = document.createElement('li');
+        liDom1.innerText = 'Javascript'
+        liDom1.id = 'li-1'
 
-        console.log(h1);
+        const liDom2 = document.createElement('li');
+        liDom2.innerText = 'ReactJS'
 
-        root.appendChild(h1);
+        ulDom.appendChild(liDom1)
+        ulDom.appendChild(liDom2)
+
+        document.body.appendChild(ulDom)
+
+
+        //ReactJS
+        const ulReact = React.createElement(
+            'ul',
+            {
+                id: 'ul-id',
+                style: 'color: red; font-size: 30px'
+            },
+            React.createElement('li', { id: 'li-1' }, 'Javascript'),
+            React.createElement('li', null, 'ReactJS'),
+        )
+
+        console.log(ulReact);
+
+        //Giai bai tap
+        const divReact = React.createElement(
+            'div',
+            {
+                className: 'post-item'
+            },
+            React.createElement('h2', { title: 'Hoc React tai F8' }, 'Hoc ReactJS'),
+            React.createElement('p', null, 'Hoc React tu co ban den nang cao')
+        )
+        console.log(divReact);
     </script>
+
 </body>
-<!-- <script src="app.js"></script> -->
 
 </html>
