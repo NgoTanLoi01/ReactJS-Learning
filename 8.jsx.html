@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // const reactCoures = 'ReactJS F8'
+
+        // const ulReact = <ul>
+        //     <li>JavaScrpit</li>
+        //     <li>ReactJS</li>
+        // </ul>
+
+
+        // //React@17
+        // //React-DOM -> Render ui
+        // ReactDOM.render(ulReact, document.getElementById('root'));
+
+        //Bai tap
+        const courses = [
+            {
+                name: 'HTML, CSS'
+            },
+            {
+                name: 'Responsive web design'
+            },
+            {
+                name: 'ReactJS'
+            },
+        ]
+        const course = <ul>{
+            courses.map((course) => { return <li>{course.name}</li> })
+        }</ul>
+
+        ReactDOM.render(course, document.getElementById('root'))
+    </script>
+
+</body>
+
+</html>

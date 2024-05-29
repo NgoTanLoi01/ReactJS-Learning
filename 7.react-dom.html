@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 </head>
 
 <body>
@@ -59,10 +59,16 @@
             React.createElement('li', null, 'ReactJS')
         )
         // Get root element
-        const root = document.getElementById('root');
+        const container = document.getElementById('root');
 
-        //React-DOM -> Render ui
-        ReactDOM.render(ulReact, root);
+
+        // //React@17
+        // //React-DOM -> Render ui
+        // ReactDOM.render(ulReact, root);
+
+        //React@18
+        const root = ReactDOM.createRoot(container)
+        root.render(ulReact)
     </script>
 
 </body>
