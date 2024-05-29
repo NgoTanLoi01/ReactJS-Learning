@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script>
+        // //Giai bai tap dung ReactDOM bt3
+        // const divReact = React.createElement(
+        //     'div',
+        //     {
+        //         className: 'post-item'
+        //     },
+        //     React.createElement('h2', { title: 'Hoc React tai F8' }, 'Hoc ReactJS'),
+        //     React.createElement('p', null, 'Hoc React tu co ban den nang cao'),
+        // )
+
+        // // Get root element
+        // const root = document.getElementById('root');
+
+        // //React-DOM -> Render ui
+        // ReactDOM.render(divReact, root);
+
+        // ==========================================================
+
+
+        // //Giai bai tap dung ReactDOM bt1 
+        // const h1React = React.createElement(
+        //     'h1',
+        //     {
+        //         title: 'Hello',
+        //         className: 'heading',
+        //     },
+        //     'Hello guys!'
+        // )
+        // // Get root element
+        // const root = document.getElementById('root');
+
+        // //React-DOM -> Render ui
+        // ReactDOM.render(h1React, root);
+
+        // ==========================================================
+
+        //Giai bai tap dung ReactDOM bt2
+
+        const ulReact = React.createElement(
+            'ul',
+            null,
+            React.createElement('li', null, 'JavaScrpit'),
+            React.createElement('li', null, 'ReactJS')
+        )
+        // Get root element
+        const root = document.getElementById('root');
+
+        //React-DOM -> Render ui
+        ReactDOM.render(ulReact, root);
+    </script>
+
+</body>
+
+</html>
