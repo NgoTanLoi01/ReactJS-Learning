@@ -30,20 +30,22 @@
         //Bai tap
         const courses = [
             {
-                name: 'HTML, CSS'
+                name: 'HTML, CSS',
             },
             {
-                name: 'Responsive web design'
+                name: 'Responsive web design',
             },
             {
                 name: 'ReactJS'
             },
         ]
-        const course = <ul>{
-            courses.map((course) => { return <li>{course.name}</li> })
+        const jsx = <ul>{
+            courses.map((course, index) => <li key={index}>{course.name}</li>)
         }</ul>
 
-        ReactDOM.render(course, document.getElementById('root'))
+        console.log(jsx);
+
+        ReactDOM.render(jsx, document.getElementById('root'))
     </script>
 
 </body>
