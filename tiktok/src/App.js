@@ -1,25 +1,55 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-const gifts =[
-  'CPU i9',
-  'RAM 32G RGB',
-  'RGB Keyboard',
-]
+//Response from API
+const courses = [
+  {
+    id: 1,
+    name: "HTML, CSS",
+  },
+  {
+    id: 2,
+    name: "Javascript",
+  },
+  {
+    id: 3,
+    name: "ReactJS",
+  },
+];
 
 function App() {
+  const [checked, setChecked] = useState([]);
 
-  const [gift, setGift] = useState()
+  const handleCheck = (id) => {
+    setChecked((prev) => {
+      const isChecked = checked.includes(id)
+      if(isChecked){
+        //Uncheck
+        return checked.filter(item => item !== id)
+      }else{
+        return [...prev, id]
+      }
+    });
+  }
 
-  const randomGift = () =>{
-    const index = Math.floor(Math.random() * gifts.length)
-
-    setGift(gifts[index]);
+  const handleSubmit = () => {
+    //call api
+    console.log({ ids: checked });
   }
 
   return (
     <div style={{ padding: 32 }}>
-      <h1>{gift || 'Chưa có phần thưởng'}</h1>
-      <button onClick={randomGift}>Lấy thưởng</button>
+      {courses.map((course) => (
+        <div key={course.id}>
+          <input
+            type="checkbox"
+            checked={checked.includes(course.id)}
+            onChange={() => handleCheck(course.id)}
+          />
+          {course.name}
+        </div>
+      ))}
+
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
 }
