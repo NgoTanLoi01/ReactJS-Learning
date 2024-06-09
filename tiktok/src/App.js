@@ -1,55 +1,36 @@
 import { useState } from "react";
 
-//Response from API
-const courses = [
-  {
-    id: 1,
-    name: "HTML, CSS",
-  },
-  {
-    id: 2,
-    name: "Javascript",
-  },
-  {
-    id: 3,
-    name: "ReactJS",
-  },
-];
-
 function App() {
-  const [checked, setChecked] = useState([]);
+  const [job, setJob] = useState("");
+  const [jobs, setJobs] = useState(() => {
+    const storageJobs = JSON.parse(localStorage.getItem("jobs"))
 
-  const handleCheck = (id) => {
-    setChecked((prev) => {
-      const isChecked = checked.includes(id)
-      if(isChecked){
-        //Uncheck
-        return checked.filter(item => item !== id)
-      }else{
-        return [...prev, id]
-      }
-    });
-  }
+    return storageJobs
+  });
 
   const handleSubmit = () => {
-    //call api
-    console.log({ ids: checked });
-  }
+    setJobs((prev) => {
+      const newJobs = [...prev, job];
+
+      //Save to localStorage
+      const jsonJobs = JSON.stringify(newJobs);
+      localStorage.setItem("jobs", jsonJobs);
+
+      return newJobs;
+    });
+    setJob("");
+  };
 
   return (
     <div style={{ padding: 32 }}>
-      {courses.map((course) => (
-        <div key={course.id}>
-          <input
-            type="checkbox"
-            checked={checked.includes(course.id)}
-            onChange={() => handleCheck(course.id)}
-          />
-          {course.name}
-        </div>
-      ))}
+      <input value={job} onChange={(e) => setJob(e.target.value)} />
+      <button onClick={handleSubmit}>Add</button>
 
-      <button onClick={handleSubmit}>Submit</button>
+      <ul>
+        {jobs.map((job, index) => (
+          <li key={index}>{job}</li>
+        ))}
+      </ul>
     </div>
   );
 }
