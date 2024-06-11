@@ -14,9 +14,9 @@ import { useEffect, useState } from "react";
 const tabs = ["posts", "comments", "albums"];
 
 function Content() {
-  const [title, setTitle] = useState("");
   const [posts, setPosts] = useState([]);
   const [type, setType] = useState(["posts"]);
+  const [showGoToTop, setShowGoToTop] = useState(false);
 
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/${type}`)
@@ -25,6 +25,25 @@ function Content() {
         setPosts(posts);
       });
   }, [type]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 200) {
+        setShowGoToTop(true);
+      } else {
+        setShowGoToTop(false);
+      }
+
+      //setShowGoToTop(window.scrollY >= 200)
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    //Cleanup funtion
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div>
@@ -45,12 +64,21 @@ function Content() {
         </button>
       ))}
 
-      <input value={title} onChange={(e) => setTitle(e.target.value)} />
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
+      {posts.map((post) => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+
+      {showGoToTop && (
+        <button
+          style={{
+            position: "fixed",
+            right: 20,
+            bottom: 20,
+          }}
+        >
+          Go to Top
+        </button>
+      )}
     </div>
   );
 }
