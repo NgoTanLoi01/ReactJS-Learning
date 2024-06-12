@@ -13,28 +13,54 @@ import { useEffect, useState } from "react";
 //2. Cleanup funtion luôn được gọi trước khi component unmounted
 //3. Cleanup funtion luôn được gọi trước khi callback được gọi (trừ lần mounted)
 
+const lessons = [
+  {
+    id: 1,
+    name: 'ReactJS là gì? Tại sao phải học ReactJS?'
+  },
+  {
+    id: 2,
+    name: 'SPA/MPA là gì?'
+  },
+  {
+    id: 3,
+    name: 'Arrow function'
+  }
+]
+
 function Content() {
-  const [avatar, setAvatar] = useState();
+  const [lessonId, setlessonId] = useState(1);
 
-  useEffect(() => {
-    //Cleanup
-    return () =>{
-      avatar && URL.revokeObjectURL(avatar.preview)
+  useEffect(() =>{
+
+    const handleComment = ({ detail }) =>{
+      console.log(detail);
     }
-  }, [avatar]);
 
-  const handleReviewAvatar = (e) => {
-    const file = e.target.files[0];
+    window.addEventListener(`lesson-${lessonId}`,handleComment)
 
-    file.preview = URL.createObjectURL(file);
-
-    setAvatar(file);
-  };
+    return() =>{
+      window.removeEventListener(`lesson-${lessonId}`,handleComment)
+    }
+  }, [lessonId])
 
   return (
     <div>
-      <input type="file" onChange={handleReviewAvatar} />
-      {avatar && <img src={avatar.preview} alt="" width="80%" />}
+      <ul>
+        {lessons.map(lesson =>(
+          <li
+            key={lesson.id}
+            style={{
+              color: lessonId === lesson.id ?
+              'red':
+              '#333'
+            }}
+            onClick={() => setlessonId(lesson.id)}
+          >
+            {lesson.name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
