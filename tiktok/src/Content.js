@@ -10,22 +10,31 @@ import { useEffect, useState } from "react";
 
 //-----------------
 //1. Callback luôn được gọi sau khi component mounted
+//2. Cleanup funtion luôn được gọi trước khi component unmounted
+//3. Cleanup funtion luôn được gọi trước khi callback được gọi (trừ lần mounted)
 
 function Content() {
-  const [countdown, setCountdown] = useState(180);
+  const [avatar, setAvatar] = useState();
 
   useEffect(() => {
-    const timerId = setTimeout(() => {
-      setCountdown(countdown - 1);
-      console.log('Countdown...');
-    }, 1000);
+    //Cleanup
+    return () =>{
+      avatar && URL.revokeObjectURL(avatar.preview)
+    }
+  }, [avatar]);
 
-    return() => clearInterval(timerId)
-  }, [countdown]);
+  const handleReviewAvatar = (e) => {
+    const file = e.target.files[0];
+
+    file.preview = URL.createObjectURL(file);
+
+    setAvatar(file);
+  };
 
   return (
     <div>
-      <h1>{countdown}</h1>
+      <input type="file" onChange={handleReviewAvatar} />
+      {avatar && <img src={avatar.preview} alt="" width="80%" />}
     </div>
   );
 }
